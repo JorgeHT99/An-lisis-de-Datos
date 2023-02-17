@@ -1,54 +1,62 @@
-lista1 = []
-lista2 = []
-lista3 = []
-lista4 = []
-nombres = []
-k = 0
-arroba = "@"
-punto = "."
-auxiliar = 0
+import numpy as np
+
+auxiliar1 = 0
 auxiliar2 = 0
-suma = ""
-dominios = []
 
+#Ejercicio 1 
 
-file = open('correos.csv','r')
+arreglo1 = np.arange(1,65,1)
+A = np.reshape(arreglo1,(8,8))
+print(A,"\n")
 
-for i in range (0,24):
-    lista1.append(file.readline())
+#Ejercicio 2
 
-print(lista1)
+B = np.transpose(A)
+print(B,"\n")
 
-for j in lista1:
-    lista2.append(j.split('@'))
+for i in range(len(B)):
+    for j in range(len(B)):
+        auxiliar1 = str(B[i][j])
+        auxiliar2 = auxiliar1.find('3')
+        if auxiliar2 != -1:
+            B[i][j] = -99
     
-for k in range (0,24): 
-    nombres.append(lista2[k][0])
+print(B,"\n")
 
-"""print("Lista de nombres: ",end = "\n")
-print(nombres)"""
+#Ejercicio 3
 
-for h in range (0,24):
-    lista3.append(lista2[k][1])
+arreglo2 = np.arange(0.4,0.8,0.01)
+C = np.reshape(arreglo2,(8,5))
 
+print(C,"\n")
 
-for l in lista3:
-    lista4.append(l.split('.'))
-    
-for g in range (0,24):
-    dominios.append(lista4[g][0])
+#Uniendo las matrices C Y B
+unionCB = np.append(C,B,axis=1)
 
-##print(lista3)
+print(unionCB,"\n")
 
-    
-    
-        
-        
-            
-        
-        
-    
-    
+#Promedio de cada columna
+vp = np.array([])
+for k in range(13):
+    promedio = np.mean(unionCB[:,k])
+    vp = np.append(vp,promedio)
+MP = np.vstack([unionCB,vp])
+
+print(MP,"\n")
+
+#Número máximo en cada fila
+vm = np.array([])
+for l in range(9):
+    valormaximo = max(MP[l,:])
+    vm = np.append(vm,valormaximo)
+
+MF = np.append(MP,np.array([vm]).transpose(),axis=1)
+
+print(MF)
+
+#Guardando en un archivo
+np.savetxt('matrizfinal.txt',MF)
+
 
 
 
