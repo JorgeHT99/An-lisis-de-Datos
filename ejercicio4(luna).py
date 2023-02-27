@@ -11,6 +11,7 @@ p = imagen.convert('RGBA')
 d = np.array(p)
 red, green, blue, alpha = d.T
 an = (red==0)&(blue==0)&(green==0)
-d[..., :-1][an.T] = (200,0,0)
+d[..., :-1][an.T] = (0,250,0)
 imf=Image.fromarray(d)
-imf
+fig,ax = plt.subplots(figsize=(10,10))
+ax.imshow(imf)
